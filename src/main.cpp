@@ -64,7 +64,7 @@ void tokenize(char **argvinput, char **argvoutput, char *operation, int& size)
 		
 }
 
-void intializetok(char *charinput, char** argv)//Use this to initialize first token
+void initializetok(char *charinput, char** argv)//Use this to initialize first token
 {
 	char *store = strtok(charinput, ""); //Tokenizes the input and stores it into store
 	int i = 0;
@@ -98,7 +98,7 @@ void stringtoken(string input)
 	strcpy(semicols, ";");
 	strcpy(ands,"&&");
 	strcpy(ors, "||");
-	strcpy(spaces, " ");
+	strcpy(spaces, " \n");
 	strcpy(exitcmd, "exit");
 	//Strcpy will check if the operations passed through are in the string
 	
@@ -125,8 +125,10 @@ void stringtoken(string input)
 	char **argvspaces = new char*[strlen(inputchar)];
 	char **argvinp = new char*[strlen(inputchar)];
 
-	initalizetok(inputchar, argvinp);
+	initializetok(inputchar, argvinp);
 
+	int status = 0;
+	int opstate = 0; //Acts as a check for operators
 
 	if (semicol || andd || orr || space)
 	{
@@ -156,9 +158,13 @@ void stringtoken(string input)
 							{
 								int size3 = 0;
 
-								tokenize(argvors, argvspaces, space, size3)
-								
-								if (strcmp(argvspaces[0], exitcmd) == 0)
+								tokenize(argvors, argvspaces, spaces, size3);
+
+								if (argvspaces[0] == NULL)
+								{
+									cerr << "Error!!";
+								}
+								else if (strcmp(argvspaces[0], exitcmd) == 0)
 								{
 									exit(0);
 								}
@@ -167,19 +173,62 @@ void stringtoken(string input)
 									executecmd(argvspaces, status);
 								}
 							}
+							if (status == 0)
+							{
+								h = size2;
+								opstate=-1;
+							}
+							else 
+							{
+								for (int k = 0; k < size2; k++)
+								{
+									argvors[k] = argvors[k+1];
+								}
+							}
+
 						}
 					}
-				}
-
+					
+					if (status == 0 || (ors&&opstate == -1))
+					{
+						for (int l = 0; l < size1; l++)
+						{
+							argvands[l] = argvands[l+1];
+							status = 200;
+						}
+					}
+					else
+					{
+						char *fals = new char[1];
+						strcpy(fals, "");
+						argvands[0] = fals;
+						delete [] fals;
+					}
 			}
 			
 		}
+		for (int m = 0; m < size; m++)
+		{
+			argvsemicol[m] = argvsemicol[m+1];
+		}
 
 	}
+	delete [] argvands;
+	delete [] argvors;
+	delete [] argvsemicol;
+	delete [] argvspaces;
+	delete [] argvinp;
+	delete [] semicols;
+	delete [] ands;
+	delete [] ors;
+	delete [] exitcmd;
+	delete [] inputchar;
+	delete [] spaces;
 
+	}
 }
 
-void display_name()
+void display()
 {
 	string prompt; //Created a string for the prompt ($ and hopefully login)
 	char host[333];
@@ -189,7 +238,7 @@ void display_name()
       perror("Error w/ getlogin()"); //Error if null
    }
 
-   if (gethostname(host, 300) != 0) //Get host info and writes it into char     array with size
+   if (gethostname(host, 300) != 0) //Get host info and writes it into char array with size
    {
       perror("Error w/ gethostname()"); //Error if does not return 0
    } 
@@ -209,31 +258,29 @@ void display_name()
 
    else
    {
-      prompt = "$ "; //Iflogin and hostname fail pastes just $
+      prompt = "$ "; //If login and hostname fail pastes just $
+	}
+
+	string userinp;
+
+	while (true)
+	{
+		cout << prompt;
+
+		getline(cin, userinp);
+
+		if (userinp.find("#") != string::npos)
+		{
+			userinp.resize(userinp.find("#"));//Resizes if find comment returns -1	
+		}
+		stringtoken(userinp);
+
 	}
 }
 
 int main()
 {
-	display_name();	
-
-	string userinp;
-
-
-	while (true)
-	{
-		cout << prompt; 		
-
-		getline(cin, userinp);
-
-		if (userinp.find("#")  != string::npos)
-		{
-			userinp.resize(userinp.find("#")); //Resizes if find comment returns -1
-		}
-
-		stringtoken(userinp);
-
-	}
+	display();
 
 	return 0;
 		

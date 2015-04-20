@@ -1,0 +1,124 @@
+Script started on Sun 19 Apr 2015 08:39:07 PM PDT
+~
+skama004@hammer $ make
+make: *** No targets specified and no makefile found.  Stop.
+~
+skama004@hammer $ ls
+[0m[01;34mbin[0m/        [01;34mDownloads[0m/            [01;32mpascal.cpp[0m*  [01;34mTemplates[0m/          [01;34mVideos[0m/
+[01;34mcs_100[0m/     [01;34mfirstrepo[0m/            [01;32mpascal.o[0m*    TEST                vimrc
+[01;34mCS100[0m/      [01;32mgeany_run_script.sh[0m*  [01;34mPictures[0m/    [01;32mtextadventure[0m*
+[01;34mDesktop[0m/    [01;34mMusic[0m/                [01;34mPublic[0m/      [01;32mtextadventure.cpp[0m*
+[01;34mDocuments[0m/  [01;32mpascal[0m*               [01;34mrshell[0m/      [01;32mtextadventure.o[0m*
+[m~
+skama004@hammer $ cd Desktop
+~/Desktop
+skama004@hammer $ ls
+[0m[01;34mCS10[0m/     [01;32mlab6.cpp~[0m*         [01;32mpascal.cpp[0m*  [01;34mrshellrepo[0m/
+[01;34mDesktop[0m/  [01;34mOld Firefox Data[0m/  [01;32mpascal.out[0m*  trash.desktop
+[m~/Desktop
+skama004@hammer $ cd rshellrepo/
+~/Desktop/rshellrepo
+skama004@hammer $ make
+g++ -g -Wall -Werror -ansi -pedantic src/main.cpp -o bin/rshell
+~/Desktop/rshellrepo
+skama004@hammer $ bin/rshell
+skama004@hammer $ ls
+bin  exec.script  LICENSE  Makefile  README.md	src
+skama004@hammer $ ls -a
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src
+skama004@hammer $ ls -a  ; echo hello; mkdir test
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src
+hello
+skama004@hammer $ ls
+bin  exec.script  LICENSE  Makefile  README.md	src  test
+skama004@hammer $ /bin/ls; ls -a
+bin  exec.script  LICENSE  Makefile  README.md	src  test
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src  test
+skama004@hammer $ sdkjfhldskjfhs
+Error w/ execvp: No such file or directory
+It worksskama004@hammer $ ls            -  a
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src  test
+skama004@hammer $ ls    ls -a && mkdir test
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src  test
+mkdir: cannot create directory `test': File exists
+skama004@hammer $ ls -a || mkdir test
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src  test
+skama004@hammer $ mkdir test && ls -a
+mkdir: cannot create directory `test': File exists
+skama004@hammer $ mkdir test || ls -a
+mkdir: cannot create directory `test': File exists
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src  test
+skama004@hammer $ ls -a  '   ; echo hello **    && mkdir test || echo world; git status
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src  test
+hello
+mkdir: cannot create directory `test': File exists
+world
+# On branch master
+# Changed but not updated:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   bin/rshell
+#
+# Untracked files:
+#   (use "git add <file>..." to include in what will be committed)
+#
+#	exec.script
+no changes added to commit (use "git add" and/or "git commit -a")
+skama004@hammer $ ls -  ||   || ls -a || ls -l        && ls -l
+bin  exec.script  LICENSE  Makefile  README.md	src  test
+total 36
+drwx------ 3 skama004 csmajs  4096 Apr 19 20:33 bin
+-rw------- 1 skama004 csmajs     0 Apr 19 20:33 exec.script
+-rw------- 1 skama004 csmajs 18030 Apr 19 18:50 LICENSE
+-rw------- 1 skama004 csmajs   135 Apr 19 18:50 Makefile
+-rw------- 1 skama004 csmajs    23 Apr 19 18:50 README.md
+drwx------ 3 skama004 csmajs  4096 Apr 19 20:11 src
+drwx------ 2 skama004 csmajs  4096 Apr 19 20:34 test
+skama004@hammer $ ls -s   l || cat test; rmdi   test
+total 36
+drwx------ 3 skama004 csmajs  4096 Apr 19 20:33 bin
+-rw------- 1 skama004 csmajs     0 Apr 19 20:33 exec.script
+-rw------- 1 skama004 csmajs 18030 Apr 19 18:50 LICENSE
+-rw------- 1 skama004 csmajs   135 Apr 19 18:50 Makefile
+-rw------- 1 skama004 csmajs    23 Apr 19 18:50 README.md
+drwx------ 3 skama004 csmajs  4096 Apr 19 20:11 src
+drwx------ 2 skama004 csmajs  4096 Apr 19 20:34 test
+rm: cannot remove `test': Is a directory
+skama004@hammer $ ls - l  l #  c  comment test
+total 36
+drwx------ 3 skama004 csmajs  4096 Apr 19 20:33 bin
+-rw------- 1 skama004 csmajs     0 Apr 19 20:33 exec.script
+-rw------- 1 skama004 csmajs 18030 Apr 19 18:50 LICENSE
+-rw------- 1 skama004 csmajs   135 Apr 19 18:50 Makefile
+-rw------- 1 skama004 csmajs    23 Apr 19 18:50 README.md
+drwx------ 3 skama004 csmajs  4096 Apr 19 20:11 src
+drwx------ 2 skama004 csmajs  4096 Apr 19 20:34 test
+skama004@hammer $ #hi
+skama004@hammer $ ls-  -a# another comment test
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src  test
+skama004@hammer $ b valgrind
+valgrind: no program specified
+valgrind: Use --help for more information.
+skama004@hammer $ valgrind          ls
+bin  exec.script  LICENSE  Makefile  README.md	src  test
+skama004@hammer $ valgrind src/main.cpp
+valgrind: src/main.cpp: Permission denied
+skama004@hammer $ exit
+~/Desktop/rshellrepo
+skama004@hammer $ ls
+[0m[01;34mbin[0m/  exec.script  LICENSE  Makefile  README.md  [01;34msrc[0m/  [01;34mtest[0m/
+[m~/Desktop/rshellrepo
+skama004@hammer $ bin/rshell
+skama004@hammer $ e ls -a; exit
+.  ..  bin  exec.script  .git  LICENSE	Makefile  README.md  src  test
+~/Desktop/rshellrepo
+skama004@hammer $ bin/rshell
+skama004@hammer $ ls -a exit
+ls: cannot access exit: No such file or directory
+skama004@hammer $ exit
+~/Desktop/rshellrepo
+skama004@hammer $ exit
+exit
+
+Script done on Sun 19 Apr 2015 08:47:03 PM PDT

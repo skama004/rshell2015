@@ -13,6 +13,7 @@ using namespace std;
 //char semicols = " ; ";
 //char ands = " && ";
 //char ors = " || ";
+//char spaces = " ";
 
 void executecmd(char **argv, int &status)
 {
@@ -24,7 +25,7 @@ void executecmd(char **argv, int &status)
 		 {
 			 status = -1;//Sets status to -1 to indicate 
 	       perror("Error w/ execvp");
-		 	 cout << "It works";
+		 	// cout << "It works";
 		 }
 		 exit(1);//Return exit(1) if an error occured
 	 }
@@ -95,7 +96,9 @@ void stringtoken(string input)
 	char *ands = new char [3];
 	char *ors = new char [3];
 	char *spaces = new char[3];
-
+	//newly allocate memory to keep track of all the operators 
+	//also create bool values to determine tests whether they work or not
+	//
 	strcpy(inputchar, input.c_str());
 	strcpy(semicols, ";");
 	strcpy(ands,"&&");
@@ -106,17 +109,17 @@ void stringtoken(string input)
 	
 	if (input.find(";") < input.size())
 	{
-		semicol = true;
+		semicol = true; //If semicolon is found and is less than the size, then bool value will be set to true to determine it is there
 	}
 
 	if (input.find("&&") < input.size())
 	{
-		andd = true;
+		andd = true;//Same with and operator
 	}
 		
 	if (input.find("||") < input.size())
 	{
-		orr = true;
+		orr = true;//Same with or operator
 	}
 	//Sets the value to be true if operation is found in string
 	
@@ -126,17 +129,20 @@ void stringtoken(string input)
 	char **argvors = new char*[strlen(inputchar)];
 	char **argvspaces = new char*[strlen(inputchar)];
 	char **argvinp = new char*[strlen(inputchar)];
+	//Newly allocates memory again for operators passed through arguments
+	//strlen return the size of char array
+	//so newly allocated memory 
+	
+	initializetok(inputchar, argvinp);//Call initalizetok function to pass in parameters and set it up for further breakdown
 
-	initializetok(inputchar, argvinp);
-
-	int status = 0;
+	int status = 0;//Acts as status of whether operators are found or not
 	int opstate = 0; //Acts as a check for operators
 
-	if (semicol || andd || orr || space)
+	if (semicol || andd || orr || space) //Checks for all 4 operators
 	{
 		int size = 0;
 
-		tokenize(argvinp, argvsemicol, semicols, size);
+		tokenize(argvinp, argvsemicol, semicols, size);//Tokenizes the arguments for semicolons
 
 		for (int i = 0; i < size; i++)
 		{
@@ -144,7 +150,7 @@ void stringtoken(string input)
 			{
 				int size1 = 0; 
 				
-				tokenize(argvsemicol, argvands, ands, size1);
+				tokenize(argvsemicol, argvands, ands, size1);//Tokenizes the arguments for ands
 				
 				for (int j = 0; j < size1; j++)
 				{
@@ -152,7 +158,7 @@ void stringtoken(string input)
 					{
 						int size2 = 0;
 
-						tokenize(argvands, argvors, ors, size2);
+						tokenize(argvands, argvors, ors, size2);//Tokenizes the arguments for ors
 
 						for (int h = 0; h < size2; h++)
 						{
@@ -160,31 +166,31 @@ void stringtoken(string input)
 							{
 								int size3 = 0;
 
-								tokenize(argvors, argvspaces, spaces, size3);
+								tokenize(argvors, argvspaces, spaces, size3);//Tokenizes the arguments for spaces
 
 								if (argvspaces[0] == NULL)
 								{
-									cerr << "Error!!";
+									cerr << "Error!!"; //Outputs an error to determine if segault or not. Outputs an error, but still runs program. *Update in README*
 								}
 								else if (strcmp(argvspaces[0], exitcmd) == 0)
 								{
-									exit(0);
+									exit(0);//Exits without an error
 								}
 								else 
 								{
-									executecmd(argvspaces, status);
+									executecmd(argvspaces, status);//Calls commands for the arguments and runs execvp within that function
 								}
 							}
-							if (status == 0)
+							if (status == 0) //Will return 0 if it failed
 							{
 								h = size2;
-								opstate=-1;
+								opstate = -1;//Sets the operation status to -1 
 							}
 							else 
 							{
 								for (int k = 0; k < size2; k++)
 								{
-									argvors[k] = argvors[k+1];
+									argvors[k] = argvors[k+1]; //arguments of ors get copied over to 1+
 								}
 							}
 
@@ -226,7 +232,7 @@ void stringtoken(string input)
 	delete [] exitcmd;
 	delete [] inputchar;
 	delete [] spaces;
-
+	//Deletes all allocated memory to ensure no memory leak. ****IF MEMORY LEAK OCCURS GO THROUGH CODE AGAIN****
 	}
 }
 
@@ -271,7 +277,7 @@ void display()
 
 		getline(cin, userinp);
 
-		if (userinp.find("#") != string::npos)
+		if (userinp.find("#") != string::npos) //Basically if anything is in it
 		{
 			userinp.resize(userinp.find("#"));//Resizes if find comment returns -1	
 		}
@@ -282,7 +288,7 @@ void display()
 
 int main()
 {
-	display();
+	display();//Calls display function
 
 	return 0;
 		

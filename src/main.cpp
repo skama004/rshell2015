@@ -5,6 +5,7 @@
 #include <string.h>
 #include <string>
 #include <stdio.h>
+#include <errno.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 using namespace std;
@@ -23,6 +24,7 @@ void executecmd(char **argv, int &status)
 		 {
 			 status = -1;//Sets status to -1 to indicate 
 	       perror("Error w/ execvp");
+		 	 cout << "It works";
 		 }
 		 exit(1);//Return exit(1) if an error occured
 	 }

@@ -20,7 +20,7 @@ Returning true will return true. Returning false will return false.
 ##Running rshell
 
  ```
- $ git clone  https://github.com/yourusername/rshell.git
+ $ git clone  https://github.com/skama004/rshell.git
  $ cd rshell
  $ git checkout hw0
  $ make

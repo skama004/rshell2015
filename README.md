@@ -34,4 +34,3 @@ Returning true will return true. Returning false will return false.
 4. Semicolon and a command such as pwd ; && ls will output, but error message from segfault check will output.
 5. Use of inline tabs `\t` will not work peroperly when passed with other commands.
 6. `cd` does not work
-3. 

@@ -10,4 +10,4 @@ rshell:
 
 ls:
 	@mkdir -p bin
-	$(CC) $(CFLAGS) src/ls.cpp -o bin/rshell
+	$(CC) $(CFLAGS) src/ls.cpp -o bin/ls

@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -g -Wall -Werror -ansi -pedantic
 
-all: rshell ls
+all: rshell ls cp
 
 
 rshell:
@@ -10,4 +10,8 @@ rshell:
 
 ls:
 	@mkdir -p bin
-	$(CC) $(CFLAGS) src/ls.cpp -o bin/rshell
+	$(CC) $(CFLAGS) src/ls.cpp -o bin/ls
+
+cp:
+	@mkdir -p bin
+	$(CC) $(CFLAGS) src/cp.cpp -o bin/cp

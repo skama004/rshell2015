@@ -2,7 +2,7 @@
 #ifndef __CP_H__
 #define __CP_H__
 
-int stdcopy(const char*, const char*);
+int stlcopy(const char*, const char*);
 
 int rwcopy(const char*, const char*);
 

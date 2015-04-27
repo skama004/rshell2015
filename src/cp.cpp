@@ -1,8 +1,13 @@
 // CP.CPP
 
+#include <cstdlib.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <errno.h>
+#include <fcntl.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
 
 #include <iostream>
 #include <fstream>
@@ -13,7 +18,7 @@ int main(int argc, const char** argv) {
     
     if(argc != 3 && argc != 4) {
         std::cout << "Invalid number of arguments" << std::endl;
-        return 1;
+        exit(1);
     }
 
     const char* _src = argv[1];
@@ -25,7 +30,7 @@ int main(int argc, const char** argv) {
 }
 
 
-int stdcopy(const char* srcpath, const char* dstpath) {
+int stlcopy(const char* srcpath, const char* dstpath) {
     
     std::ifstream srcfile(srcpath);
     std::ofstream dstfile(dstpath);
@@ -40,4 +45,9 @@ int stdcopy(const char* srcpath, const char* dstpath) {
 }
 
 
+int rwcopy(const char* srcpath, const char* dstpath) {
 
+    
+
+    return 0;
+}

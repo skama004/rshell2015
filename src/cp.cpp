@@ -110,7 +110,7 @@ int bufcopy(const char* src_path, const char* dst_path) {
     int src_fd, dst_fd;
     int src_flags = O_RDONLY;
     int dst_flags = O_WRONLY | O_CREAT;
-    mode_t dst_mode = S_IRUSR | S_IWUSR;
+    mode_t dst_mode = 0;//S_IRUSR | S_IWUSR;
     if( (src_fd = open(src_path, src_flags)) == -1) { perror("open src"); exit(1); }    
     if( (dst_fd = open(dst_path, dst_flags, dst_mode)) == -1) { 
         perror("open dst"); exit(1); 

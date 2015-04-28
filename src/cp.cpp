@@ -30,16 +30,35 @@ int main(int argc, const char** argv) {
     if(argc == 4) {
         if(strcmp(argv[3], "-all") == 0) {
             // run and time all methods
+            
+            double e_time= 0;
+            
+            Timer t;
 
-
+            std::cout << "Benchmarking stlcopy... " << std::flush;
+            t.start();
+            stlcopy(_src, _dst);
+            t.elapsedUserTime(e_time);
+            std::cout << e_time << "sec\n";
+            
+            std::cout << "Benchmarking rwcopy... " << std::flush;
+            t.start();
+            rwcopy(_src, _dst);
+            t.elapsedUserTime(e_time);
+            std::cout << e_time << "sec\n";
+            
+            std::cout << "Benchmarking bufcopy... " << std::flush;
+            t.start();
+            bufcopy(_src, _dst);
+            t.elapsedUserTime(e_time);
+            std::cout << e_time << "sec\n";
 
         } else {
             std::cout << "invalid argument: " << argv[3] << std::endl;
             exit(1); 
         }
     } else {
-        // efficient shit
-        rwcopy(_src, _dst); 
+        bufcopy(_src, _dst); 
     }
 
     return 0;
@@ -97,14 +116,15 @@ int bufcopy(const char* src_path, const char* dst_path) {
         perror("open dst"); exit(1); 
     }
     
-    struct stat *stat_buf = NULL;
-    if(stat(src_path, stat_buf) == -1) { perror("stat src"); exit(1); }
+    struct stat stat_buf;
+    if(fstat(src_fd, &stat_buf) == -1) { perror("stat src"); exit(1); }
 
-    off_t buf_size = stat_buf->st_size;
-  
-    char* buf = NULL;
-    if(read(src_fd, &buf, buf_size) == -1) { perror("read src"); exit(1); } 
-    if(write(dst_fd, &buf, buf_size) == -1) { perror("write dest"); exit(1); } 
+    char buf[BUFSIZ];
+    int ret;
+    while( (ret = read(src_fd, &buf, sizeof(buf))) > 0)
+       if(write(dst_fd, &buf, ret) == -1) { perror("write dest"); exit(1); } 
+
+    if(ret == -1) { perror("read source"); exit(1); }
 
     if(close(src_fd) == -1) { perror("source close"); exit(1); }
     if(close(dst_fd) == -1) { perror("dest close"); exit(1); }

@@ -59,9 +59,9 @@ ls is a bash command that lists all folder and files in your directories. ls was
  ```
  $ git clone  https://github.com/skama004/rshell.git
  $ cd rshell
- $ git checkout hw0
+ $ git checkout hw1
  $ make
- $ bin/rshell
+ $ bin/ls
  ```
  
  ##Bugs/Limitations

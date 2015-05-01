@@ -443,6 +443,67 @@ int main(int argc, char** argv)
 		char temp[] = ".";
 		recursioncall(temp, flag); //if implemented properly, rshell should be run here
 	}
+
+	else 
+	{
+		//similar to recursioncall function
+		for (unsigned i = 0; i < arguments.size(); i++)
+		{
+			DIR *dirStream;
+			dirent* currentdirectory;
+
+			struct stat s;
+
+			char placeholder[2000];
+			char path[1000];
+
+			bool file;
+			bool test;
+
+			if (!(dirStream = opendir(".")))
+			{
+				perror("opendir");
+				exit(1);
+			}
+
+			while ((currentdirectory = readdir(dirStream)))
+			{
+				if (errno != 0)
+				{
+					perror("readdir");
+					exit(1);
+				}
+
+				strcpy(placeholder, arguments.at(i).c_str());
+				strcpy(path, "./"); 
+				strcat(path, currentdirectory->d_name);
+
+				if (stat(path, &s) == -1)	
+				{
+					perror("stat");
+					exit(1);
+				}
+
+				if (!strcmp(placeholder, currentdirectory->d_name));
+				{
+					test = true;
+					break;
+				}
+
+				if (closedir(dirStream) == -1)
+				{
+					perror("closedir");
+					exit(1);
+				}
+
+				if (test && file)
+				{
+					recursioncall(placeholder, flag);
+				}
+			}
+		}
+
+	}
 	
 	return 0;
 }

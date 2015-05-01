@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <errno.h>
 #include <algorithm> 
+#include <time.h>
+#include <iomanip>
 #include <vector>
 using namespace std;
 
@@ -60,6 +62,49 @@ int blocks(char* directoryname, int flag) //get total number of blocks and divid
 	}
 	return blk;
 }
+
+void printl(struct stat x, char* str, char* name)
+{
+	string directory = str;
+	string cmd = "stat --printf= '%A %h %U %G %s' " + directory;
+	system(cmd.c_str());
+
+	char temp[18];
+	struct tm *Time;
+	Time = localtime(&(x.st_mtime)); 
+	strftime(temp, 18, "%b %d %H:%M", Time);//passes in time, month, day, hour, minute
+
+	cout <<left << setw(15) << ' ' << temp << ' '; //Sets width to 15 and outputs left operand
+
+	if ((x.st_mode & S_IFDIR) && str[0] == '.')
+	{
+		cout << "\x1b[94m\x1b[100m" << name << "\x1b[0m"; //Print blue, gray, and off
+	}
+
+	else if (x.st_mode &  S_IFDIR) 
+	{
+		cout << "\x1b[94m" << name << "\x1b[0m"; //Print blue
+		cout << '/';
+	}
+
+	else if ((x.st_mode & S_IXUSR) && str[0] == '.')
+	{
+		cout << "\x1b[92m\x1b[100m" << name << "\x1b[0m"; //Print green, gray, and off
+	}
+
+	else if (x.st_mode & S_IXUSR)
+	{
+		cout << "\x1b[92m" << name << "\x1b[0m"; 
+		cout << '*';
+	}
+
+	else 
+	{
+		cout << name;
+	}
+	cout << "  " << endl;
+}
+
 
 
 void recursioncall(char *directoryname, int flag) //Function for -R
@@ -122,8 +167,38 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 				//Checks S_IFDIR permission first
 				{
 					cout << "\x1b[94m\x1b[100m" << cstrings.at(i) << "\x1b[0m";
-					//Outputs with color for extra credit
+					//Outputs blue, gray, << , off
 				}
+				else if(s.st_mode & S_IFDIR)
+				{
+					cout << "\x1b[94m" << cstrings.at(i) << "\x1b[0m"; //directories in blue
+				}
+
+				else if (s.st_mode & S_IXUSR && cstrings.at(i)[0] == '.') 
+				{
+					cout << "\x1b[92m\x1b[100m" << cstrings.at(i) << "\x1b[0m";//green << << off
+				}
+
+				else if (s.st_mode & S_IXUSR)
+				{
+					cout << "\x1b[92m" << cstrings.at(i) << "\x1b[0m"; //executables
+				}
+
+				else 
+				{
+					cout << cstrings.at(i);
+				}
+
+				if (s.st_mode & S_IFDIR)
+				{
+					cout << '/';
+				}
+
+				else if (s.st_mode & S_IXUSR)
+				{
+					cout << '*';
+				}
+				cout << "  ";
 			}
 		}
 	}

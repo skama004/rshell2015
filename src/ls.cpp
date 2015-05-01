@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <errno.h>
 #include <algorithm> 
+#include <ctime>
 #include <time.h>
 #include <iomanip>
 #include <vector>
@@ -67,7 +68,7 @@ void printl(struct stat x, char* str, char* name)
 {
 	string directory = str;
 	string cmd = "stat --printf= '%A %h %U %G %s' " + directory;
-	system(cmd.c_str());
+	system(cmd.c_str()); //Essentially executes cmd
 
 	char temp[18];
 	struct tm *Time;
@@ -195,7 +196,17 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 			}
 		}
 
-		else if (flag%2 == 0 && flag%3 == 0 && flag%5 == 0) //-a -l cases
+		else if (flag%2 == 0 && flag%3 == 0 && flag%5 == 0) //-a -l -R  cases
+		{
+			printl(s, path, cstrings.at(i));
+			if ((s.st_mode & S_IFDIR) && cstrings.at(i)[0] != '.')
+			{
+				recursioncall(path, flag);
+				cout << endl << endl;
+			}
+		}
+
+		else if (flag%2 == 0 && flag%3 == 0 && flag%5 != 0) //-a -l
 		{
 			printl(s, path, cstrings.at(i));
 		}
@@ -339,7 +350,7 @@ int main(int argc, char** argv)
 
 	//Commented out for the sake of compiling 
 	
-	for (int i = 0; i < argc; i++)
+	for (int i = 1; i < argc; i++)
 	{
 		//Add cases of possibilities with -l, -a, -R.
 		//All possible cases will be multiplied into flag
@@ -457,8 +468,8 @@ int main(int argc, char** argv)
 			char placeholder[2000];
 			char path[1000];
 
-			bool file;
-			bool test;
+		//	bool file;
+		//	bool test;
 
 			if (!(dirStream = opendir(".")))
 			{
@@ -486,7 +497,7 @@ int main(int argc, char** argv)
 
 				if (!strcmp(placeholder, currentdirectory->d_name));
 				{
-					test = true;
+		//			test = true;
 					break;
 				}
 
@@ -496,10 +507,10 @@ int main(int argc, char** argv)
 					exit(1);
 				}
 
-				if (test && file)
-				{
+		//		if (test && file)
+		//		{
 					recursioncall(placeholder, flag);
-				}
+		//		}
 			}
 		}
 

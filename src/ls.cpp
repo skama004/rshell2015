@@ -106,7 +106,6 @@ void printl(struct stat x, char* str, char* name)
 }
 
 
-
 void recursioncall(char *directoryname, int flag) //Function for -R
 {
 	DIR* dirStream;
@@ -137,7 +136,7 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 	{
 		cstrings.push_back(currentdirectory->d_name);//Copy contents of file into cstrings 
 	}
-	sort(cstrings.begin(), cstrings.end()); //Sort the cstrings "vector" to be in order
+	sort(cstrings.begin(), cstrings.end()); //Sort the cstrings vector to be in order
 
 	for (unsigned i = 0; i < cstrings.size(); i++)
 	{
@@ -172,7 +171,9 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 				else if(s.st_mode & S_IFDIR)
 				{
 					cout << "\x1b[94m" << cstrings.at(i) << "\x1b[0m"; //directories in blue
+					cout << '/';
 				}
+
 
 				else if (s.st_mode & S_IXUSR && cstrings.at(i)[0] == '.') 
 				{
@@ -182,6 +183,7 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 				else if (s.st_mode & S_IXUSR)
 				{
 					cout << "\x1b[92m" << cstrings.at(i) << "\x1b[0m"; //executables
+					cout << '*';
 				}
 
 				else 
@@ -189,16 +191,56 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 					cout << cstrings.at(i);
 				}
 
-				if (s.st_mode & S_IFDIR)
-				{
-					cout << '/';
-				}
-
-				else if (s.st_mode & S_IXUSR)
-				{
-					cout << '*';
-				}
 				cout << "  ";
+			}
+		}
+
+		else if (flag%2 == 0 && flag%3 == 0 && flag%5 == 0) //-a -l cases
+		{
+			printl(s, path, cstrings.at(i));
+		}
+
+		else if (flag%2 == 0 && flag%3 != 0 && flag%5 == 0) //-a, -R cases
+		{
+			if((s.st_mode & S_IFDIR)&&cstrings.at(i)[0] == '.')
+			{
+				cout << "\x1b[94m\x1b[100m" << cstrings.at(i) << "\x1b[0m";
+			}
+			
+			else if (s.st_mode & S_IFDIR)
+			{
+				cout << "\x1b[94m" << cstrings.at(i) << "\x1b[0m";
+				cout << '/';
+			}
+
+			else if ((s.st_mode & S_IXUSR)&& cstrings.at(i)[0] == '.')
+			{
+				cout << "\x1b[92m\x1b[100m" << cstrings.at(i) << "\x1b[0m";
+			}
+
+			else if (s.st_mode & S_IXUSR)
+			{
+				cout << "\x1b[92m" << cstrings.at(i) << "\x1b[0m";
+				cout << '*';
+			}
+
+			else 
+			{
+				cout << cstrings.at(i);
+			}
+			cout << "  ";
+		}
+
+		else if (flag%2 != 0 && flag%3 == 0 && flag%5 == 0)
+		{
+			if (cstrings.at(i)[0] != '.')
+			{
+				printl(s, path, cstrings.at(i));
+			}
+			if ((s.st_mode & S_IFDIR)&& cstrings.at(i)[0] != '.')
+			{
+				cout << endl << endl;
+				recursioncall(path, flag);
 			}
 		}
 	}

@@ -44,7 +44,7 @@ int blocks(char* directoryname, int flag) //get total number of blocks and divid
 			perror("stat");
 		}
 
-		if (flag % 2 == 0) //If even
+		if (flag % 2 == 0) 
 		{
 			blk += x.st_blocks; //st_blocks = 512B allocated, added to variable blk
 		}
@@ -347,7 +347,7 @@ int main(int argc, char** argv)
 	bool files = false;
 
 	unsigned int flag = 1;
-
+	//a = 2, l =3, R = 5, a&l = 6, a&R =10, l&R= 15, all 3 = 30, no flags =1 ***
 	//Commented out for the sake of compiling 
 	
 	for (int i = 1; i < argc; i++)
@@ -486,7 +486,7 @@ int main(int argc, char** argv)
 				}
 
 				strcpy(placeholder, arguments.at(i).c_str());
-				strcpy(path, "./"); 
+				strcpy(path, "./"); //Checks for run command 
 				strcat(path, currentdirectory->d_name);
 
 				if (stat(path, &s) == -1)	
@@ -498,7 +498,8 @@ int main(int argc, char** argv)
 				if (!strcmp(placeholder, currentdirectory->d_name));
 				{
 		//			test = true;
-					break;
+					if (s.st_mode & S_IFREG)
+						break;
 				}
 
 				if (closedir(dirStream) == -1)
@@ -518,10 +519,3 @@ int main(int argc, char** argv)
 	
 	return 0;
 }
-
-
-
-
-
-
-

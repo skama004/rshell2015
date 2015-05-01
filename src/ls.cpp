@@ -85,7 +85,7 @@ void printl(struct stat x, char* str, char* name)
 	else if (x.st_mode &  S_IFDIR) 
 	{
 		cout << "\x1b[94m" << name << "\x1b[0m"; //Print blue
-		cout << '/';
+		//cout << '/';
 	}
 
 	else if ((x.st_mode & S_IXUSR) && str[0] == '.')
@@ -96,12 +96,22 @@ void printl(struct stat x, char* str, char* name)
 	else if (x.st_mode & S_IXUSR)
 	{
 		cout << "\x1b[92m" << name << "\x1b[0m"; 
-		cout << '*';
+	//	cout << '*';
 	}
 
 	else 
 	{
 		cout << name;
+	}
+
+	if (x.st_mode & S_IFDIR)
+	{
+		cout << '/';
+	}
+
+	else if (x.st_mode & S_IXUSR)
+	{
+		cout << '*';
 	}
 	cout << "  " << endl;
 }
@@ -128,6 +138,11 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 	if(flag%3 == 0)
 	{
 		block = blocks(directoryname, flag);
+		//cout << "Total: " << (block/2) << endl;
+	}
+
+	if (flag%3 == 0)
+	{
 		cout << "Total: " << (block/2) << endl;
 	}
 

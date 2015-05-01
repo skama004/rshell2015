@@ -231,7 +231,7 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 			cout << "  ";
 		}
 
-		else if (flag%2 != 0 && flag%3 == 0 && flag%5 == 0)
+		else if (flag%2 != 0 && flag%3 == 0 && flag%5 == 0) //-l -R cases
 		{
 			if (cstrings.at(i)[0] != '.')
 			{
@@ -243,13 +243,110 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 				recursioncall(path, flag);
 			}
 		}
+
+		else if (flag%2 == 0 && flag%3 != 0 && flag%5 != 0) //-a case
+		{
+			if((s.st_mode & S_IFDIR)&&cstrings.at(i)[0] == '.')
+			{
+				cout << "\x1b[94m\x1b[100m" << cstrings.at(i) << "\x1b[0m";
+			}
+			
+			else if (s.st_mode & S_IFDIR)
+			{
+				cout << "\x1b[94m" << cstrings.at(i) << "\x1b[0m";
+				cout << '/';
+			}
+
+			else if ((s.st_mode & S_IXUSR)&& cstrings.at(i)[0] == '.')
+			{
+				cout << "\x1b[92m\x1b[100m" << cstrings.at(i) << "\x1b[0m";
+			}
+
+			else if (s.st_mode & S_IXUSR)
+			{
+				cout << "\x1b[92m" << cstrings.at(i) << "\x1b[0m";
+				cout << '*';
+			}
+
+			else 
+			{
+				cout << cstrings.at(i);
+			}
+			cout << "  ";
+		}
+
+		else if (flag%2 != 0 && flag%3 == 0 && flag%5 != 0) //-l case
+		{
+			if (cstrings.at(i)[0] != '.')
+			{
+				printl(s, path, cstrings.at(i));
+			}
+		}
+
+		else if (flag%2 != 0 && flag%3 != 0 && flag%5 == 0) //-R case
+		{
+			if(cstrings.at(i)[0] != '.')
+			{
+				if((s.st_mode & S_IFDIR)&&cstrings.at(i)[0] == '.')
+				{
+					cout << "\x1b[94m\x1b[100m" << cstrings.at(i) << "\x1b[0m";
+				}
+			
+				else if (s.st_mode & S_IFDIR)
+				{
+					cout << "\x1b[94m" << cstrings.at(i) << "\x1b[0m";
+					cout << '/';
+				}
+
+				else if ((s.st_mode & S_IXUSR)&& cstrings.at(i)[0] == '.')
+				{
+					cout << "\x1b[92m\x1b[100m" << cstrings.at(i) << "\x1b[0m";
+				}	
+
+				else if (s.st_mode & S_IXUSR)
+				{
+					cout << "\x1b[92m" << cstrings.at(i) << "\x1b[0m";
+					cout << '*';
+				}
+
+				else 
+				{
+					cout << cstrings.at(i);
+				}
+				cout << "  ";
+					
+			}
+		}
+		if (cstrings.at(i)[0] != '.' && (s.st_mode & S_IFDIR))
+		{
+			cout << endl << endl;
+			recursioncall(path, flag);
+		}
 	}
 }
 
 
-int main()
+int main(int argc, char** argv)
 {
-	cout << "\x1b[94m\x1b[100m";
+	//	cout << "\x1b[94m\x1b[100m";
+	vector <string> arguments;
+	
+	arguments.push_back(".");
+
+	//bool files = false;
+
+	//unsigned int flag = 1;
+
+	//Commented out for the sake of compiling 
+	
+	for (int i = 0; i < argc; i++)
+	{
+		//Add cases of possibilities with -l, -a, -R.
+		//All possible cases will be multiplied into flag
+		//use strcmp
+		//FIX ME
+	}
+	
 	return 0;
 }
 

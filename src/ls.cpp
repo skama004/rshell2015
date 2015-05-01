@@ -333,9 +333,9 @@ int main(int argc, char** argv)
 	
 	arguments.push_back(".");
 
-	//bool files = false;
+	bool files = false;
 
-	//unsigned int flag = 1;
+	unsigned int flag = 1;
 
 	//Commented out for the sake of compiling 
 	
@@ -343,8 +343,105 @@ int main(int argc, char** argv)
 	{
 		//Add cases of possibilities with -l, -a, -R.
 		//All possible cases will be multiplied into flag
-		//use strcmp
-		//FIX ME
+		//a, l, r = 2, 3, 5 respectively
+		//Went through every possible combination of the 3
+		if (!strcmp(argv[i] , "-a"))
+		{
+			flag *= 2;
+		}
+
+		else if (!strcmp(argv[i] , "-l"))
+		{
+			flag *= 3;
+		}
+
+		else if (!strcmp(argv[i], "-R"))
+		{
+			flag *= 5;
+		}
+
+		else if (!strcmp(argv[i], "-al"))
+		{
+			flag *= 6;
+		}
+
+		else if (!strcmp(argv[i], "-la"))
+		{
+			flag *= 6;
+		}
+
+		else if (!strcmp(argv[i], "-aR"))
+		{
+			flag *= 10;
+		}
+
+		else if (!strcmp(argv[i], "-Ra"))
+		{
+			flag *= 10;
+		}
+
+		else if (!strcmp(argv[i], "-lR"))
+		{
+			flag *= 15;
+		}
+
+		else if (!strcmp(argv[i], "-Rl"))
+		{
+			flag *= 15;
+		}
+
+		else if (!strcmp(argv[i], "-alR"))
+		{
+			flag *= 30;
+		}
+
+			else if (!strcmp(argv[i], "-aRl"))
+			{
+				flag *= 30;
+			}
+
+			else if (!strcmp(argv[i], "-Ral"))
+			{
+				flag *= 30;
+			}
+			
+			else if (!strcmp(argv[i], "-laR"))
+			{
+				flag *= 30;
+			}
+			
+			else if (!strcmp(argv[i], "-Rla"))
+			{
+				flag *= 30;
+			}
+			
+			else if (!strcmp(argv[i], "-lRa"))			
+			{
+				flag *= 30;
+			}
+
+			//else if (!strcmp(argv[i], "
+		else 
+		{
+			if (files == false)
+			{
+				files = true;
+				string temp = argv[i]; //temp to store commands
+				arguments.at(0) = temp;
+			}
+
+			else 
+			{
+				arguments.push_back(argv[i]);
+			}
+		}
+
+	}
+
+	if(files == false)
+	{
+		char temp[] = ".";
+		recursioncall(temp, flag); //if implemented properly, rshell should be run here
 	}
 	
 	return 0;

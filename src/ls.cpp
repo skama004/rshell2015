@@ -67,7 +67,7 @@ int blocks(char* directoryname, int flag) //get total number of blocks and divid
 void printl(struct stat x, char* str, char* name)
 {
 	string directory = str;
-	string cmd = "stat --printf= '%A %h %U %G %s' " + directory;
+	string cmd = "stat --printf='%A %h %U %G %s' " + directory;
 	system(cmd.c_str()); //Essentially executes cmd
 
 	char temp[18];
@@ -267,6 +267,7 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 			{
 				cout << endl << endl;
 				recursioncall(path, flag);
+				cout << endl << endl;
 			}
 		}
 
@@ -347,6 +348,7 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 		{
 			cout << endl << endl;
 			recursioncall(path, flag);
+			cout << endl << endl;
 		}
 	}
 }

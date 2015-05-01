@@ -10,7 +10,7 @@
 #include <vector>
 using namespace std;
 
-int blocks(char* directoryname, int flag) //Acts as a helper for dir syscalls
+int blocks(char* directoryname, int flag) //get total number of blocks and divide by block size working with bytes
 {
 	int blk = 0;
 	DIR *dirStream;
@@ -34,14 +34,16 @@ int blocks(char* directoryname, int flag) //Acts as a helper for dir syscalls
 		strcpy(path, directoryname);
 		strcat(path, "/");
 		strcat(path, currentdirectory->d_name);
+		//directoryname/d_name
+
 		if (stat(path, &x) == -1) //Stat returns -1 if error
 		{
 			perror("stat");
 		}
 
-		if (flag % 2 == 0) //Mod by 2
+		if (flag % 2 == 0) //If even
 		{
-			blk += x.st_blocks;
+			blk += x.st_blocks; //st_blocks = 512B allocated, added to variable blk
 		}
 
 		else
@@ -98,12 +100,39 @@ void recursioncall(char *directoryname, int flag) //Function for -R
 		{
 			perror("readdir"); //Error if not equal to 0 with errno
 		}
+
+		char path[1000];
+		strcpy(path, directoryname);
+		strcat(path, "/");
+		strcat(path, cstrings.at(i));
+		//directoryname/cstrings.at(i)
+		//src/ls.cpp as an example
+		struct stat s;
+
+		if (stat(path, &s) == -1)
+		{
+			perror("stat"); //If stat returns -1 then it's an error
+		}
+
+		if (flag == 1)
+		{
+			if (cstrings.at(i)[0] != '.') //Case for .'s
+			{
+				if((s.st_mode & S_IFDIR) && cstrings.at(i)[0] == '.')
+				//Checks S_IFDIR permission first
+				{
+					cout << "\x1b[94m\x1b[100m" << cstrings.at(i) << "\x1b[0m";
+					//Outputs with color for extra credit
+				}
+			}
+		}
 	}
 }
 
 
 int main()
 {
+	cout << "\x1b[94m\x1b[100m";
 	return 0;
 }
 

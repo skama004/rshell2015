@@ -1,0 +1,582 @@
+Script started on Fri 01 May 2015 02:58:28 PM PDT
+~
+skama004@hammer $ cd CS100
+~/CS100
+skama004@hammer $ cd rshell
+~/CS100/rshell
+skama004@hammer $ ls
+[0m[01;34mbin[0m/  LICENSE  ls.script  Makefile  README.md  [01;34msrc[0m/  [01;34mtest[0m/
+[m~/CS100/rshell
+skama004@hammer $ cd[K[Kmake
+g++ -g -Wall -Werror -ansi -pedantic src/main.cpp -o bin/rshell
+g++ -g -Wall -Werror -ansi -pedantic src/ls.cpp -o bin/ls
+g++ -g -Wall -Werror -ansi -pedantic src/cp.cpp -o bin/cp
+~/CS100/rshell
+skama004@hammer $ bin/ls
+LICENSE  Makefile  README.md  [94msrc[0m/  
+
+ls.cpp  main.cpp  Timer.h  cp.cpp  cp.h  
+
+[94mtest[0m/  
+
+exec.script  
+
+[94mbin[0m/  
+
+[92mrshell[0m*  [92mls[0m*  [92mcp[0m*  
+
+ls.script  ~/CS100/rshell
+skama004@hammer $ bin/ls -l
+Total: 40
+-rw------- 1 skama004 csmajs 18030               Apr 27 15:15 LICENSE  
+-rw------- 1 skama004 csmajs 255               May 01 11:09 Makefile  
+-rw------- 1 skama004 csmajs 1402               Apr 27 15:15 README.md  
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100msrc[0m/  
+
+
+Total: 32
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100mtest[0m/  
+
+
+Total: 8
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100mbin[0m/  
+
+
+Total: 252
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+-rw------- 1 skama004 csmajs 0               May 01 14:52 ls.script  
+~/CS100/rshell
+skama004@hammer $ bin/ls -R
+.: 
+LICENSE  Makefile  README.md  [94msrc[0m/  
+
+./src: 
+ls.cpp  main.cpp  Timer.h  cp.cpp  cp.h  
+
+[94mtest[0m/  
+
+./test: 
+exec.script  
+
+[94mbin[0m/  
+
+./bin: 
+[92mrshell[0m*  [92mls[0m*  [92mcp[0m*  
+
+ls.script  ~/CS100/rshell
+skama004@hammer $ bin/ls -l -a
+Total: 52
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 8 skama004 csmajs 4096               Apr 27 17:57 [94m[100m..[0m/  
+drwx------ 8 skama004 csmajs 4096               May 01 13:47 [94m[100m.git[0m/  
+-rw------- 1 skama004 csmajs 18030               Apr 27 15:15 LICENSE  
+-rw------- 1 skama004 csmajs 255               May 01 11:09 Makefile  
+-rw------- 1 skama004 csmajs 1402               Apr 27 15:15 README.md  
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100msrc[0m/  
+
+
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100mtest[0m/  
+
+
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100mbin[0m/  
+
+
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+-rw------- 1 skama004 csmajs 0               May 01 14:52 ls.script  
+~/CS100/rshell
+skama004@hammer $ bin/ls -a
+[94m[100m.[0m  [94m[100m..[0m  [94m[100m.git[0m  LICENSE  Makefile  README.md  [94msrc[0m/  
+
+[94m[100m.[0m  [94m[100m..[0m  ls.cpp  main.cpp  Timer.h  cp.cpp  cp.h  
+
+[94mtest[0m/  
+
+[94m[100m.[0m  [94m[100m..[0m  exec.script  
+
+[94mbin[0m/  
+
+[94m[100m.[0m  [94m[100m..[0m  [92mrshell[0m*  [92mls[0m*  [92mcp[0m*  
+
+ls.script  ~/CS100/rshell
+skama004@hammer $ bn[Kin [K/ls -l -R -a
+.: 
+Total: 52
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 8 skama004 csmajs 4096               Apr 27 17:57 [94m[100m..[0m/  
+drwx------ 8 skama004 csmajs 4096               May 01 13:47 [94m[100m.git[0m/  
+-rw------- 1 skama004 csmajs 18030               Apr 27 15:15 LICENSE  
+-rw------- 1 skama004 csmajs 255               May 01 11:09 Makefile  
+-rw------- 1 skama004 csmajs 1402               Apr 27 15:15 README.md  
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100msrc[0m/  
+./src: 
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+
+
+./src: 
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100mtest[0m/  
+./test: 
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+
+
+./test: 
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100mbin[0m/  
+./bin: 
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+
+
+./bin: 
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+-rw------- 1 skama004 csmajs 0               May 01 14:52 ls.script  
+~/CS100/rshell
+skama004@hammer $ bin/ls -lr[KRA[Ka
+.: 
+Total: 52
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 8 skama004 csmajs 4096               Apr 27 17:57 [94m[100m..[0m/  
+drwx------ 8 skama004 csmajs 4096               May 01 13:47 [94m[100m.git[0m/  
+-rw------- 1 skama004 csmajs 18030               Apr 27 15:15 LICENSE  
+-rw------- 1 skama004 csmajs 255               May 01 11:09 Makefile  
+-rw------- 1 skama004 csmajs 1402               Apr 27 15:15 README.md  
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100msrc[0m/  
+./src: 
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+
+
+./src: 
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100mtest[0m/  
+./test: 
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+
+
+./test: 
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100mbin[0m/  
+./bin: 
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+
+
+./bin: 
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+-rw------- 1 skama004 csmajs 0               May 01 14:52 ls.script  
+~/CS100/rshell
+skama004@hammer $ bin/ls -Ral
+.: 
+Total: 52
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 8 skama004 csmajs 4096               Apr 27 17:57 [94m[100m..[0m/  
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+drwx------ 8 skama004 csmajs 4096               May 01 13:47 [94m[100m.git[0m/  
+-rw------- 1 skama004 csmajs 18030               Apr 27 15:15 LICENSE  
+-rw------- 1 skama004 csmajs 255               May 01 11:09 Makefile  
+-rw------- 1 skama004 csmajs 1402               Apr 27 15:15 README.md  
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100msrc[0m/  
+./src: 
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+
+
+./src: 
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100mtest[0m/  
+./test: 
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+
+
+./test: 
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100mbin[0m/  
+./bin: 
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+
+
+./bin: 
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+-rw------- 1 skama004 csmajs 0               May 01 14:52 ls.script  
+~/CS100/rshell
+skama004@hammer $ bin/ls -[K[K -l -l -l -l -l -l
+Total: 40
+-rw------- 1 skama004 csmajs 18030               Apr 27 15:15 LICENSE  
+-rw------- 1 skama004 csmajs 255               May 01 11:09 Makefile  
+-rw------- 1 skama004 csmajs 1402               Apr 27 15:15 README.md  
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100msrc[0m/  
+
+
+Total: 32
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100mtest[0m/  
+
+
+Total: 8
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100mbin[0m/  
+
+
+Total: 252
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+-rw------- 1 skama004 csmajs 0               May 01 14:52 ls.script  
+~/CS100/rshell
+skama004@hammer $ bin/ [Kls a[K-a - a[K[Ka -a -a -a 
+[94m[100m.[0m  [94m[100m..[0m  [94m[100m.git[0m  LICENSE  Makefile  README.md  [94msrc[0m/  
+
+[94m[100m.[0m  [94m[100m..[0m  ls.cpp  main.cpp  Timer.h  cp.cpp  cp.h  
+
+[94mtest[0m/  
+
+[94m[100m.[0m  [94m[100m..[0m  exec.script  
+
+[94mbin[0m/  
+
+[94m[100m.[0m  [94m[100m..[0m  [92mrshell[0m*  [92mls[0m*  [92mcp[0m*  
+
+ls.script  ~/CS100/rshell
+skama004@hammer $ bin/ls -R[Kr -l -a
+opendir: No such file or directory
+~/CS100/rshell
+skama004@hammer $ bin/ [Kls -r
+opendir: No such file or directory
+~/CS100/rshell
+skama004@hammer $ bin/ls -RLA
+opendir: No such file or directory
+~/CS100/rshell
+skama004@hammer $ bin/ls -l[KRLA[K[K[KLR[K[Klra
+opendir: No such file or directory
+~/CS100/rshell
+skama004@hammer $ bin/ls kdsgjsdfkgjdsfgk;j
+opendir: No such file or directory
+bash: j: command not found
+~/CS100/rshell
+skama004@hammer $ bin/ls -[Kls ls 
+opendir: No such file or directory
+~/CS100/rshell
+skama004@hammer $ bin/ls -R
+.: 
+LICENSE  Makefile  README.md  [94msrc[0m/  
+
+./src: 
+ls.cpp  main.cpp  Timer.h  cp.cpp  cp.h  
+
+[94mtest[0m/  
+
+./test: 
+exec.script  
+
+[94mbin[0m/  
+
+./bin: 
+[92mrshell[0m*  [92mls[0m*  [92mcp[0m*  
+
+ls.script  ~/CS100/rshell
+skama004@hammer $ valgrind [K[K[K[K[K[K[K[K[Kbin/ls -
+opendir: No such file or directory
+~/CS100/rshell
+skama004@hammer $ bin/;s [K[K[Kls src
+ls.cpp  main.cpp  Timer.h  cp.cpp  cp.h  ~/CS100/rshell
+skama004@hammer $ bin/ls -R src
+src: 
+ls.cpp  main.cpp  Timer.h  cp.cpp  cp.h  ~/CS100/rshell
+skama004@hammer $ bin/ls -a src
+[94m[100m.[0m  [94m[100m..[0m  ls.cpp  main.cpp  Timer.h  cp.cpp  cp.h  ~/CS100/rshell
+skama004@hammer $ vin/[K[K[K[Kbo[Kin/ls -R[Kl c[Ksrc
+Total: 32
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+~/CS100/rshell
+skama004@hammer $ valgrind --leak-checl[Kk=yes bin/ls -alR
+==18444== Memcheck, a memory error detector
+==18444== Copyright (C) 2002-2012, and GNU GPL'd, by Julian Seward et al.
+==18444== Using Valgrind-3.8.1 and LibVEX; rerun with -h for copyright info
+==18444== Command: bin/ls -alR
+==18444== 
+.: 
+Total: 52
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 8 skama004 csmajs 4096               Apr 27 17:57 [94m[100m..[0m/  
+drwx------ 8 skama004 csmajs 4096               May 01 13:47 [94m[100m.git[0m/  
+-rw------- 1 skama004 csmajs 18030               Apr 27 15:15 LICENSE  
+-rw------- 1 skama004 csmajs 255               May 01 11:09 Makefile  
+-rw------- 1 skama004 csmajs 1402               Apr 27 15:15 README.md  
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100msrc[0m/  
+./src: 
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+
+
+./src: 
+Total: 40
+drwx------ 2 skama004 csmajs 4096               May 01 13:54 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 10147               May 01 13:35 ls.cpp  
+-rw------- 1 skama004 csmajs 6912               Apr 27 15:15 main.cpp  
+-rw------- 1 skama004 csmajs 2698               Apr 27 17:51 Timer.h  
+-rw------- 1 skama004 csmajs 3372               Apr 27 17:51 cp.cpp  
+-rw------- 1 skama004 csmajs 169               Apr 27 17:51 cp.h  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100mtest[0m/  
+./test: 
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+
+
+./test: 
+Total: 16
+drwx------ 2 skama004 csmajs 4096               May 01 14:51 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rw------- 1 skama004 csmajs 5706               Apr 27 15:15 exec.script  
+
+
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100mbin[0m/  
+./bin: 
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+
+
+./bin: 
+Total: 260
+drwx------ 2 skama004 csmajs 4096               May 01 14:52 [94m[100m.[0m/  
+drwx------ 6 skama004 csmajs 4096               May 01 14:52 [94m[100m..[0m/  
+-rwx------ 1 skama004 csmajs 48464               May 01 14:52 [92m[100mrshell[0m*  
+-rwx------ 1 skama004 csmajs 149011               May 01 14:52 [92m[100mls[0m*  
+-rwx------ 1 skama004 csmajs 52811               May 01 14:52 [92m[100mcp[0m*  
+
+
+-rw------- 1 skama004 csmajs 0               May 01 14:52 ls.script  
+==18444== 
+==18444== HEAP SUMMARY:
+==18444==     in use at exit: 229,712 bytes in 7 blocks
+==18444==   total heap usage: 131 allocs, 124 frees, 466,780 bytes allocated
+==18444== 
+==18444== 32,816 bytes in 1 blocks are definitely lost in loss record 1 of 3
+==18444==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==18444==    by 0x32680A8620: __alloc_dir (in /lib64/libc-2.12.so)
+==18444==    by 0x401A3D: recursioncall(char*, int) (ls.cpp:130)
+==18444==    by 0x402F87: main (ls.cpp:472)
+==18444== 
+==18444== 98,448 bytes in 3 blocks are definitely lost in loss record 2 of 3
+==18444==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==18444==    by 0x32680A8620: __alloc_dir (in /lib64/libc-2.12.so)
+==18444==    by 0x401A3D: recursioncall(char*, int) (ls.cpp:130)
+==18444==    by 0x401F19: recursioncall(char*, int) (ls.cpp:219)
+==18444==    by 0x402F87: main (ls.cpp:472)
+==18444== 
+==18444== 98,448 bytes in 3 blocks are definitely lost in loss record 3 of 3
+==18444==    at 0x4A06A2E: malloc (vg_replace_malloc.c:270)
+==18444==    by 0x32680A8620: __alloc_dir (in /lib64/libc-2.12.so)
+==18444==    by 0x401A3D: recursioncall(char*, int) (ls.cpp:130)
+==18444==    by 0x40296C: recursioncall(char*, int) (ls.cpp:350)
+==18444==    by 0x402F87: main (ls.cpp:472)
+==18444== 
+==18444== LEAK SUMMARY:
+==18444==    definitely lost: 229,712 bytes in 7 blocks
+==18444==    indirectly lost: 0 bytes in 0 blocks
+==18444==      possibly lost: 0 bytes in 0 blocks
+==18444==    still reachable: 0 bytes in 0 blocks
+==18444==         suppressed: 0 bytes in 0 blocks
+==18444== 
+==18444== For counts of detected and suppressed errors, rerun with: -v
+==18444== ERROR SUMMARY: 3 errors from 3 contexts (suppressed: 6 from 6)
+~/CS100/rshell
+skama004@hammer $ #END test
+~/CS100/rshell
+skama004@hammer $ exit
+exit
+
+Script done on Fri 01 May 2015 03:01:07 PM PDT

@@ -64,7 +64,7 @@ ls is a bash command that lists all folder and files in your directories. ls was
  $ bin/ls
  ```
  
-##Bugs/Limitations
+###Bugs/Limitations
 1. The formatting for the -l flag is slightly off.
 2. Outputs have too big spaces between them
 3. consistently running bin/ls causes memory leaks

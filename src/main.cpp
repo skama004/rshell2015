@@ -3,6 +3,7 @@
 #include <vector>
 #include <unistd.h>
 #include <string.h>
+#include <fcntl.h>
 #include <string>
 #include <stdio.h>
 #include <errno.h>
@@ -296,45 +297,46 @@ void IOcheck(char** args) //Function to check for IO Redirection
 			args[i] = 0;
 			if ((fd = open(args[i+1], O_RDONLY)) == -1)
 			{
-				perror("open"); //error checking for open
+				perror("open"); //Error checking for open
 			}
-			if ((dup2(fd, 0)) == -1) //dup2 makes 0 the copy of fd
+			if ((dup2(fd, 0)) == -1)//Dup2 makes 0 the copy of fd
 			{
-				perror("dup2"); //error checking for dup2
+				perror("dup2");//error checking
 			}
 		}
 
 		else if (!strcmp(args[i], ">"))
 		{
-			if(!strcmp(args[i+1], ">")) //If >> 
+			if (!strcmp(args[i+1], ">")) //If >>
 			{
 				args[i] = 0;
 				args[i+1] = 0;
 
 				if ((open(args[i+2], O_CREAT|O_WRONLY|O_APPEND, 0666)) == -1)
 				{
-					perror("Second open");
+					perror ("Second open");
 				}
 
-				if((dup2(fd, 1)) == -1)
+				if ((dup2(fd,1)) == -1)
 				{
-					peror("Second dup2");	
+					perror ("Second dup2");
 				}
+
 				i++;
 			}
 
-			else
+			else 
 			{
 				args[i] = 0;
 
 				if ((open(args[i+1], O_CREAT|O_WRONLY|O_TRUNC, 0666)) == -1)
 				{
-					perror("Third open");
+					perror ("Third open");
 				}
 
 				if ((dup2(fd,1)) == -1)
 				{
-					perror("Third dup2");
+					perror ("Third dup2");
 				}
 			}
 		}

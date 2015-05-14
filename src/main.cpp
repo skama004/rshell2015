@@ -286,6 +286,62 @@ void display()
 	}
 }
 
+void IOcheck(char** args) //Function to check for IO Redirection
+{
+	for (int i = 0; args[i] != '\0'; i++)
+	{
+		int fd = 0;
+		if (!strcmp(args[i], "<"))
+		{
+			args[i] = 0;
+			if ((fd = open(args[i+1], O_RDONLY)) == -1)
+			{
+				perror("open"); //error checking for open
+			}
+			if ((dup2(fd, 0)) == -1) //dup2 makes 0 the copy of fd
+			{
+				perror("dup2"); //error checking for dup2
+			}
+		}
+
+		else if (!strcmp(args[i], ">"))
+		{
+			if(!strcmp(args[i+1], ">")) //If >> 
+			{
+				args[i] = 0;
+				args[i+1] = 0;
+
+				if ((open(args[i+2], O_CREAT|O_WRONLY|O_APPEND, 0666)) == -1)
+				{
+					perror("Second open");
+				}
+
+				if((dup2(fd, 1)) == -1)
+				{
+					peror("Second dup2");	
+				}
+				i++;
+			}
+
+			else
+			{
+				args[i] = 0;
+
+				if ((open(args[i+1], O_CREAT|O_WRONLY|O_TRUNC, 0666)) == -1)
+				{
+					perror("Third open");
+				}
+
+				if ((dup2(fd,1)) == -1)
+				{
+					perror("Third dup2");
+				}
+			}
+		}
+	}
+}
+
+
 int main()
 {
 	display();//Calls display function

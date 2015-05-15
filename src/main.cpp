@@ -343,6 +343,46 @@ void IOcheck(char** args) //Function to check for IO Redirection
 	}
 }
 
+void replacestring(string &subject, const string& search, const string& replace)
+{
+	size_t pos = 0;
+
+	while ((pos = subject.find(search,pos)) != string::npos)
+	{
+		subject.replace(pos, search.length(), replace);
+		pos += replace.length();
+	}
+}
+
+void connectors(string &s) //Connector check
+{
+	replacestring(s, "<", " < ");
+	replacestring(s, ">>", " >> ");
+	replacestring(s, ">", " > ");
+	replacestring(s, "|", " | ");
+}
+
+void pipes1 (vector <string> cmdlist)
+{
+	vector<string> pt1;
+	vector<string> pt2;
+
+	unsigned i;
+	for (i = 0; i <cmdlist.size() && cmdlist.at(i) != "|"; i++) //checks | 
+	{
+		pt1.push_back(cmdlist.at(i));
+	}
+
+	for (i = i+1; i <cmdlist.size(); i++)
+	{
+		pt2.push_back(cmdlist.at(i));
+	}
+
+	if (pt2.size() == 0) //if no pipes
+	{
+		
+	}
+}
 
 int main()
 {

@@ -380,6 +380,27 @@ void pipes1 (vector <string> cmdlist)
 
 	if (pt2.size() == 0) //if no pipes
 	{
+		unsigned size = cmdlist.size();
+		char** argument = new char* [size+1];
+		argument[size] = '\0';
+
+		for (unsigned i = 0; i < size; i++)
+		{
+			argument[i] = new char[cmdlist.at(i).size()];
+			strcpy(argument[i], cmdlist.at(i).c_str());
+		}
+		IOcheck(argument);
+
+		if (execvp(argument[0], argument) == -1)
+		{
+			delete[] argument;
+			perror("execvp");
+			exit(1);
+		}
+	}
+
+	else
+	{
 		
 	}
 }

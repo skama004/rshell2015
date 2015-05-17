@@ -401,7 +401,80 @@ void pipes1 (vector <string> cmdlist)
 
 	else
 	{
-		
+		int fd[2];
+		if (pipe(fd) == -1)
+			perror("pipe");
+			int forktest = fork();
+			if (forktest == -1)
+			{
+				perror("fork");
+			}
+
+		else if (forktest == 0)
+		{
+			if (dup2(fd[1], 1) == -1)
+			{
+				perror("dup2");
+			}
+
+			if (-1 == close(fd[0]))
+			{
+				perror("close");	
+			}
+
+			unsigned size = pt1.size();
+
+			char** argument = new char*[size + 1];
+			argument[size] = '\0';
+
+			for (unsigned i = 0; i < size; i++)
+			{
+				argument[i] = new char[pt1.at(i).size()];
+				strcpy(argument[i], pt1.at(i).c_str());
+			}
+
+			IOcheck(argument);
+
+			if (execvp(argument[0], argument) == -1)
+			{
+				delete [] argument;
+				perror ("execvp");
+				exit(1);
+			}
+		}
+
+		else //All error checking
+		{
+			int status = 0;
+			int restore = 0;
+
+			if (waitpid(-1, &status, 0) == -1)
+			{
+				perror("waitpid");
+			}
+
+			if ((restore=dup(0)) == -1)
+			{
+				perror("dup");
+			}
+
+			if (dup2(fd[0], 0) == -1)
+			{
+				perror("dup2");
+			}
+
+			if (close(fd[1]) == -1)
+			{
+				perror("close");
+			}
+			
+			pipes1(pt2);
+
+			if (dup2(restore,0) == -1)
+			{
+				perror("dup2");
+			}
+		}
 	}
 }
 

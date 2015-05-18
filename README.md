@@ -91,7 +91,7 @@ Piping used only 1 symbol ('|')
  $ cd rshell
  $ git checkout hw2
  $ make
- $ bin/main.cpp
+ $ bin/rshell
  ```
 
 ###Bugs/Limitations

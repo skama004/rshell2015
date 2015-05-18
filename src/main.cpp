@@ -237,55 +237,6 @@ void stringtoken(string input)
 	}
 }
 
-void display()
-{
-	string prompt; //Created a string for the prompt ($ and hopefully login)
-	char host[333];
-
-   if (getlogin() == NULL) //Gets login info
-   {
-      perror("Error w/ getlogin()"); //Error if null
-   }
-
-   if (gethostname(host, 300) != 0) //Get host info and writes it into char array with size
-   {
-      perror("Error w/ gethostname()"); //Error if does not return 0
-   } 
-
-   if (getlogin() != NULL && gethostname(host, 300) == 0)
-   {
-      for (int i = 0; i < 50; i++)
-      {
-         if (host[i] == '.')
-         {
-            host[i] = '\0';
-         }
-         prompt = getlogin();
-         prompt = prompt+"@"+host+ " $ "; //Should print skama004@hammer $
-      }
-   }
-
-   else
-   {
-      prompt = "$ "; //If login and hostname fail pastes just $
-	}
-
-	string userinp;
-
-	while (true)
-	{
-		cout << prompt;
-
-		getline(cin, userinp);
-
-		if (userinp.find("#") != string::npos) //Basically if anything is in it
-		{
-			userinp.resize(userinp.find("#"));//Resizes if find comment returns -1	
-		}
-		stringtoken(userinp);
-
-	}
-}
 
 void IOcheck(char** args) //Function to check for IO Redirection
 {
@@ -312,7 +263,7 @@ void IOcheck(char** args) //Function to check for IO Redirection
 				args[i] = 0;
 				args[i+1] = 0;
 
-				if ((open(args[i+2], O_CREAT|O_WRONLY|O_APPEND, 0666)) == -1)
+				if ((fd = open(args[i+2], O_CREAT|O_WRONLY|O_APPEND, 0666)) == -1)
 				{
 					perror ("Second open");
 				}
@@ -325,11 +276,11 @@ void IOcheck(char** args) //Function to check for IO Redirection
 				i++;
 			}
 
-			else 
+			else // if just > 
 			{
 				args[i] = 0;
 
-				if ((open(args[i+1], O_CREAT|O_WRONLY|O_TRUNC, 0666)) == -1)
+				if ((fd = open(args[i+1], O_CREAT|O_WRONLY|O_TRUNC, 0666)) == -1)
 				{
 					perror ("Third open");
 				}
@@ -477,6 +428,59 @@ void pipes1 (vector <string> cmdlist)
 		}
 	}
 }
+
+void display()
+{
+	string prompt; //Created a string for the prompt ($ and hopefully login)
+	char host[333];
+
+   if (getlogin() == NULL) //Gets login info
+   {
+      perror("Error w/ getlogin()"); //Error if null
+   }
+
+   if (gethostname(host, 300) != 0) //Get host info and writes it into char array with size
+   {
+      perror("Error w/ gethostname()"); //Error if does not return 0
+   } 
+
+   if (getlogin() != NULL && gethostname(host, 300) == 0)
+   {
+      for (int i = 0; i < 50; i++)
+      {
+         if (host[i] == '.')
+         {
+            host[i] = '\0';
+         }
+         prompt = getlogin();
+         prompt = prompt+"@"+host+ " $ "; //Should print skama004@hammer $
+      }
+   }
+
+   else
+   {
+      prompt = "$ "; //If login and hostname fail pastes just $
+	}
+
+	string userinp;
+
+	while (true)
+	{
+		cout << prompt;
+
+		getline(cin, userinp);
+
+		if (userinp.find("#") != string::npos) //Basically if anything is in it
+		{
+			userinp.resize(userinp.find("#"));//Resizes if find comment returns -1	
+		}
+		connectors(userinp); //Setup for I/O and pipes
+
+		stringtoken(userinp);
+
+	}
+}
+
 
 int main()
 {

@@ -85,4 +85,17 @@ I/O Redirection uses 3 symbols ('<', '>', ">>")
 Piping used only 1 symbol ('|')
 1. | is generally used to chain commands together. history | tail -10 will list the last 10 commands executed
 
+###How to Run
+ ```
+ $ git clone  https://github.com/skama004/rshell.git
+ $ cd rshell
+ $ git checkout hw2
+ $ make
+ $ bin/main.cpp
+ ```
+
 ###Bugs/Limitations
+I/O Redirection outputs an error everytimme used.
+Piping does not work as of 5/17/15 
+
+Will continue to work on it.

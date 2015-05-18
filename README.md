@@ -69,3 +69,20 @@ ls is a bash command that lists all folder and files in your directories. ls was
 2. Outputs have too big spaces between them
 3. consistently running bin/ls causes memory leaks
 4. -R outputs everything from the deepest folder. Not every folder.
+
+
+#I/O Redirection and Piping
+Input and output redirection allows input and output beyond the use of stdin, stdout, stderr.
+
+Piping is used to connect multiple data processes. 
+
+###How to
+I/O Redirection uses 3 symbols ('<', '>', ">>")
+1. < is used for stdin. wc -l < main.cpp will count the amount of lines in main.cpp and output to stdout.  
+2. > is used for stdout. ls > output1.txt will store the contents outputted by ls into output1.txt
+3. >> is used similarly to > but instead of replacing all of the contents, it will append the contents.
+
+Piping used only 1 symbol ('|')
+1. | is generally used to chain commands together. history | tail -10 will list the last 10 commands executed
+
+###Bugs/Limitations

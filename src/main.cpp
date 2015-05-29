@@ -20,52 +20,17 @@ void sighandler(int i)
 	//signal(SIGINT, SIG_IGN);
 	if (i == SIGINT)
 	{
-		cout << endl << flush;
+		cout << endl  << flush;
 	}
 
-	else if (i == SIGTSTP)
-	{
-		cout << endl << flush;
-	}
+//	else if (i == SIGTSTP)
+//	{
+//		cout << endl << flush;
+//	}
 }
 
 void executecmd(char **argv, int &status)
 {
-/*	string path = getenv("PATH");
-		if (path.empty())
-		{
-			perror("getenv");
-		}
-
-		vector<string> dirPath;
-		while(!(path.find(":") == string::npos))
-		{
-			dirPath.push_back(path.substr(0, path.find(":")));
-			path = path.substr(path.find(":")+1);
-		}
-		
-		int exec = 0;
-		for (unsigned i = 0; i < dirPath.size(); i++)
-		{
-			string temp = argv[0];
-			dirPath[i].append("/");
-			dirPath[i].append(temp);
-				if ((exec = (access(const_cast<char*> (dirPath[i].c_str()), X_OK))) == 0)
-				{
-					if (execv(const_cast<char*>(dirPath.at(i).c_str()), argv) == -1)
-					{
-						perror("execv");
-						display();
-						//exit(0);
-					}
-				}
-		}
-
-		if (exec == -1)
-		{
-			perror("access");
-			exit(1);
-		}*/
 
 	 int pid = fork();
   
@@ -79,28 +44,6 @@ void executecmd(char **argv, int &status)
 		 }
 		 exit(1);//Return exit(1) if an error occured
 		// pipes1(status);
-	/*	if(strcmp(argv[0], "cd") == 0)
-		{
-			if(status == 1)
-			{
-				cout << "cd working" << endl;
-				char *homedir = getenv("HOME");
-				if(chdir(homedir) == -1)
-				{
-					perror("chdir");
-				}
-			}
-			else
-			{
-				cout << "cd running " << endl;
-				if(chdir(argv[1]) == -1)
-				{
-					perror("chdir2");
-				}
-			}
-			//display();
-			//exit(0);
-		}*/
 	 }
 				
 	else if (pid == -1)//If for returns an error
@@ -115,7 +58,7 @@ void executecmd(char **argv, int &status)
 		struct sigaction sig;
 
 		sigignore(SIGINT);
-		sigignore(SIGTSTP);
+	//	sigignore(SIGTSTP);
 		if (wait(&status) == -1)
 		{
 			perror("Error w/ wait");
@@ -131,10 +74,10 @@ void executecmd(char **argv, int &status)
 			perror("sigaction");
 		}
 
-		if (sigaction(SIGTSTP, &sig, NULL) == -1)
-		{
-			perror("sigaction");
-		}
+//		if (sigaction(SIGTSTP, &sig, NULL) == -1)
+//		{
+//			perror("sigaction");
+//		}
 	}
 }
 

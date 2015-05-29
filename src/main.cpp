@@ -495,21 +495,21 @@ void display()
 		perror("sigaction");
 	}
 
-	char* cwd; //current working directory
+//	char* cwd; //current working directory
 
-	char buffer[PATH_MAX + 1];
+//	char buffer[PATH_MAX + 1];
 
-	cwd = getcwd(buffer, PATH_MAX + 1);
+//	cwd = getcwd(buffer, PATH_MAX + 1);
 
-	if(cwd == NULL)
-	{
-		perror("getcwd");
-	}
+	//if(cwd == NULL)
+//	{
+//		perror("getcwd");
+//	}
 
-	if (-1 == setenv("OLDPWD", cwd, 1))
-	{
-		perror("setenv");
-	}
+//	if (-1 == setenv("OLDPWD", cwd, 1))
+//	{
+//		perror("setenv");
+//	}
 
   	while (true)
 	{
@@ -658,19 +658,20 @@ void display()
 				if (argvspaces2[1] == NULL) //If just cd by itself
 				{
 					cwd2 = getcwd(buff, PATH_MAX + 1);
-
 					if (cwd2 == NULL)
 					{
 						perror("getcwd");
 					}
+
+					cout << cwd2 << endl;
 
 					if (setenv("OLDPWD", cwd2, 1) == -1)
 					{
 						perror("setenv");	
 					}
 
-					path2 = getenv("HOME");
-
+					path2 = getenv("HOME"); // change back to HOME
+					cout << path2 << endl;
 					if (path2 == NULL)
 					{
 						perror("getenv");
@@ -680,11 +681,11 @@ void display()
 					{
 						perror("chdir");
 					}
-
+					
 					if (setenv("PWD", path2, 1) == -1)
 					{
-						perror("So much error checking.."); //Remove this before submitting
-						path2 = getenv ("OLDPWD");
+						perror("setenv.");
+					//	path2 = getenv ("OLDPWD");
 					}
 					delete [] cd;
 					delete [] spa;
@@ -793,8 +794,25 @@ void display()
 
 int main()
 {
-	display();//Calls display function
+	char* cwd; //current working directory
 
+	char buffer[PATH_MAX + 1];
+
+	cwd = getcwd(buffer, PATH_MAX + 1);
+
+	if(cwd == NULL)
+	{
+		perror("getcwd");
+	}
+
+	if (-1 == setenv("OLDPWD", cwd, 1))
+	{
+		perror("setenv");
+	}
+	while(1)
+	{
+		display();//Calls display function
+	}
 	return 0;
 		
 }

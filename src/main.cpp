@@ -13,9 +13,18 @@ using namespace std;
 
 void display();
 
-void sigctrlC(int i)
+void sighandler(int i)
 {
-	signal(SIGINT, SIG_IGN);
+	//signal(SIGINT, SIG_IGN);
+	if (i == SIGINT)
+	{
+		cout << endl << flush;
+	}
+
+	else if (i == SIGTSTP)
+	{
+		cout << endl << flush;
+	}
 }
 
 void executecmd(char **argv, int &status)
@@ -101,10 +110,28 @@ void executecmd(char **argv, int &status)
 
 	else if (pid > 0)//If Parent id is still running
 	{
+		struct sigaction sig;
+
+		sigignore(SIGINT);
+		sigignore(SIGTSTP);
 		if (wait(&status) == -1)
 		{
 			perror("Error w/ wait");
 			exit(1);
+		}
+
+		memset(&sig, 0, sizeof(sig));
+
+		sig.sa_handler = sighandler; 
+
+		if (sigaction(SIGINT, &sig, NULL) == -1)
+		{
+			perror("sigaction");
+		}
+
+		if (sigaction(SIGTSTP, &sig, NULL) == -1)
+		{
+			perror("sigaction");
 		}
 	}
 }
@@ -511,7 +538,7 @@ void stringtoken(string input)
 
 void display()
 {
-	signal(SIGINT, sigctrlC);
+	//signal(SIGINT, sighandler);
 
 	string prompt; //Created a string for the prompt ($ and hopefully login)
 	char host[333];

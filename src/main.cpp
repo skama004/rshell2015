@@ -663,7 +663,7 @@ void display()
 			char **argvinput = new char*[strlen(inputc)]; //similar to what was done in stringtoken
 			char **argvspaces = new char*[strlen(inputc)];
 
-			int size = 0;
+			int size;
 
 			initializetok(inputc, argvinput);
 			tokenize(argvinput, argvspaces, space, size);
@@ -673,6 +673,167 @@ void display()
 			if (check == "cd")
 			{
 				checkforcd = true;
+				//cd1(input); **ERASE THIS ONCE YOU'RE DONE*****
+				
+				char *cd = new char[3];
+				char *spa = new char[3];
+
+				strcpy(cd, "cd");
+				strcpy(spa, " ");
+
+				char *input = new char[userinp.length() + 1];
+
+				strcpy(input, userinp.c_str());
+
+				char **argvinput2 = new char *[strlen(input)];
+				char **argvspaces2 = new char *[strlen(input)];
+
+				int sz;
+
+				initializetok(input, argvinput2);
+				tokenize(argvinput2, argvspaces2, spa, sz);
+
+				string check2 = argvspaces2[0];
+				
+				if (check2 != "cd" || sz > 2)
+				{
+					cerr << "Error: cd" << endl;
+
+					delete [] cd;
+					delete [] spa;
+					delete [] input;
+					delete [] argvinput2;
+					delete [] argvspaces2;
+					
+					return;
+				}
+
+				char *cwd2;
+				char *path2;
+
+				char buff[PATH_MAX + 1];
+
+				if (argvspaces2[1] == NULL) //If just cd by itself
+				{
+					cwd2 = getcwd(buff, PATH_MAX + 1);
+
+					if (cwd2 == NULL)
+					{
+						perror("getcwd");
+					}
+
+					if (setenv("OLDPWD", cwd2, 1) == -1)
+					{
+						perror("setenv");	
+					}
+
+					path2 = getenv("HOME");
+
+					if (path2 == NULL)
+					{
+						perror("getenv");
+					}
+
+					if (chdir(path2)== -1)
+					{
+						perror("chdir");
+					}
+
+					if (setenv("PWD", path2, 1) == -1)
+					{
+						perror("So much error checking.."); //Remove this before submitting
+						path2 = getenv ("OLDPWD");
+					}
+					delete [] cd;
+					delete [] spa;
+					delete [] input;
+					delete [] argvinput2;
+					delete [] argvspaces2;
+					
+					return;
+				}
+				
+				check2 = argvspaces2[1];
+				
+				if (check2 == "-") //cd - 
+				{
+					cwd2 = getcwd(buff, PATH_MAX + 1);
+
+					if (cwd2 == NULL)
+					{
+						perror("getcwd");
+					}
+						
+					path2 = getenv("OLDPWD");
+
+					if (path2 == NULL)
+					{
+						perror("getenv");
+					}
+
+				//	if (setenv("OLDPWD", cwd2, 1) == -1)
+				//	{
+				//		perror("setenv");	
+				//	}
+
+					if (chdir(path2) == -1)
+					{
+						perror("chdir");
+					}
+					
+					if (setenv("PWD", path2, 1) == -1)
+					{
+						perror("setenv(PWD)");
+						//path2 = getenv ("OLDPWD");
+					}
+
+					if (setenv("OLDPWD", cwd2, 1) == -1)
+					{
+						perror("setenv(OLDPWD)"); 
+						//path2 = getenv ("OLDPWD");
+					}
+
+				}
+
+				else
+				{
+					cwd2 = getcwd(buff, PATH_MAX + 1);
+
+					if (cwd2 == NULL)
+					{
+						perror("getcwd");
+					}
+					
+					if (setenv("OLDPWD", cwd2, 1) == -1)
+					{
+						perror("setenv(OLDPWD)"); 
+					}
+
+					if (chdir(check2.c_str()) == -1)
+					{
+						perror("chdir");
+					}
+				
+					cwd2 = getcwd(buff, PATH_MAX + 1);
+
+					if (cwd2 == NULL)
+					{
+						perror("getcwd");
+					}
+					
+					if (setenv("PWD", cwd2, 1) == -1)
+					{
+						perror("setenv(PWD)"); 
+					}
+					
+				}
+				
+				delete [] cd;
+				delete [] spa;
+				delete [] input;
+				delete [] argvinput2;	
+				delete [] argvspaces2;
+					
 			}
 
 			delete [] space;

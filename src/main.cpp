@@ -20,7 +20,7 @@ void sigctrlC(int i)
 
 void executecmd(char **argv, int &status)
 {
-	string path = getenv("PATH");
+/*	string path = getenv("PATH");
 		if (path.empty())
 		{
 			perror("getenv");
@@ -43,7 +43,7 @@ void executecmd(char **argv, int &status)
 				{
 					if (execv(const_cast<char*>(dirPath.at(i).c_str()), argv) == -1)
 					{
-						perror("execvp");
+						perror("execv");
 						display();
 						//exit(0);
 					}
@@ -54,21 +54,21 @@ void executecmd(char **argv, int &status)
 		{
 			perror("access");
 			exit(1);
-		}
+		}*/
 
 	 int pid = fork();
   
  	 if (pid == 0)
 	 {
-	 	 /*if (-1 == execvp(argv[0],argv))//Runs execvp to whatever arguments are passed through
+	 	 if (-1 == execvp(argv[0],argv))//Runs execvp to whatever arguments are passed through
 		 {
 			 status = -1;//Sets status to -1 to indicate 
 	       perror("Error w/ execvp");
 		 	// cout << "It works";
 		 }
 		 exit(1);//Return exit(1) if an error occured
-		// pipes1(status);*/
-		if(strcmp(argv[0], "cd") == 0)
+		// pipes1(status);
+	/*	if(strcmp(argv[0], "cd") == 0)
 		{
 			if(status == 1)
 			{
@@ -89,7 +89,7 @@ void executecmd(char **argv, int &status)
 			}
 			//display();
 			//exit(0);
-		}
+		}*/
 	 }
 				
 	else if (pid == -1)//If for returns an error
@@ -556,9 +556,9 @@ void display()
 		{
 			userinp.resize(userinp.find("#"));//Resizes if find comment returns -1	
 		}
-			connectors(userinp);
+		connectors(userinp);
 
-			stringtoken(userinp);
+		stringtoken(userinp);
 	}
 }
 

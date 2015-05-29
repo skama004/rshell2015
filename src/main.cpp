@@ -673,7 +673,6 @@ void display()
 			if (check == "cd")
 			{
 				checkforcd = true;
-				//cd1(input); **ERASE THIS ONCE YOU'RE DONE*****
 				
 				char *cd = new char[3];
 				char *spa = new char[3];
@@ -795,7 +794,7 @@ void display()
 
 				}
 
-				else
+				else //cd with path name
 				{
 					cwd2 = getcwd(buff, PATH_MAX + 1);
 

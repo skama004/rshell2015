@@ -7,6 +7,8 @@
 #include <string>
 #include <stdio.h>
 #include <errno.h>
+#include <limits.h>
+#include <csignal>
 #include <sys/types.h>
 #include <sys/wait.h>
 using namespace std;
@@ -540,41 +542,104 @@ void display()
 {
 	//signal(SIGINT, sighandler);
 
-	string prompt; //Created a string for the prompt ($ and hopefully login)
-	char host[333];
+	struct sigaction sig;
+	memset(&sig, 0, sizeof(sig));
 
-   if (getlogin() == NULL) //Gets login info
-   {
-      perror("Error w/ getlogin()"); //Error if null
-   }
-
-   if (gethostname(host, 300) != 0) //Get host info and writes it into char array with size
-   {
-      perror("Error w/ gethostname()"); //Error if does not return 0
-   } 
-
-   if (getlogin() != NULL && gethostname(host, 300) == 0)
-   {
-      for (int i = 0; i < 50; i++)
-      {
-         if (host[i] == '.')
-         {
-            host[i] = '\0';
-         }
-         prompt = getlogin();
-         prompt = prompt+"@"+host+ " $ "; //Should print skama004@hammer $
-      }
-   }
-
-   else
-   {
-      prompt = "$ "; //If login and hostname fail pastes just $
+	sig.sa_handler = sighandler;
+	
+	if(sigaction(SIGINT, &sig, NULL) == -1)
+	{
+		perror("sigaction");
 	}
 
-	string userinp;
+	char* cwd; //current working directory
 
-	while (true)
+	char buffer[PATH_MAX + 1];
+
+	cwd = getcwd(buffer, PATH_MAX + 1);
+
+	if(cwd == NULL)
 	{
+		perror("getcwd");
+	}
+
+	if (-1 == setenv("OLDPWD", cwd, 1))
+	{
+		perror("setenv");
+	}
+
+  	while (true)
+	{
+		string prompt; //Created a string for the prompt ($ and hopefully login)
+		char host[333];
+
+   	if (getlogin() == NULL) //Gets login info
+   	{
+      	perror("Error w/ getlogin()"); //Error if null
+   	}	
+
+   	if (gethostname(host, 300) != 0) //Get host info and writes it into char array with size
+   	{
+      	perror("Error w/ gethostname()"); //Error if does not return 0
+   	}
+		//Moved to inside infinite loop
+
+		char *path; 
+
+		path = getenv ("HOME");
+		
+		if (path == NULL)
+		{
+			perror("getenv");
+		}
+
+		char* cwd; //current working directory
+
+		char buffer[PATH_MAX + 1];
+
+		cwd = getcwd(buffer, PATH_MAX + 1);
+
+		if(cwd == NULL)
+		{
+			perror("getcwd");
+		}	
+
+		string path2 = path;
+		string path3 = cwd;
+		string prompt2;
+
+		if (path3.find(path2) != string::npos)
+		{
+			prompt2 = path3.substr(path2.size(), path3.size());
+			prompt2 = "~" + prompt2;
+		}	
+
+		else
+		{
+			prompt2 = path3;
+		}
+
+		if (getlogin() != NULL && gethostname(host, 300) == 0)
+   	{
+      	for (int i = 0; i < 50; i++)
+      	{
+        		if (host[i] == '.')
+         	{
+            	host[i] = '\0';
+         	}
+         	prompt = getlogin();
+         	prompt = prompt+"@"+host+ prompt2 +  " $ "; //Should print skama004@hammer $
+      	}
+   	}
+
+   	else
+  	 	{
+      	prompt = prompt2 + "$ "; //If login and hostname fail pastes just $
+		}
+
+		string userinp;
+
+
 		cout << prompt;
 
 		getline(cin, userinp);
@@ -583,9 +648,43 @@ void display()
 		{
 			userinp.resize(userinp.find("#"));//Resizes if find comment returns -1	
 		}
-		connectors(userinp);
+		
+		bool checkforcd = false;
+		
+		//connectors(userinp);
+		
+		if (userinp.find("cd") != string::npos)
+		{
+			char *space = new char[3]; //newly allocates memory to check for spaces
+			strcpy(space, " ");
+			char *inputc = new char [userinp.length() + 1]; //newly allocates memory to make a char* from string
+			strcpy(inputc, userinp.c_str());
 
-		stringtoken(userinp);
+			char **argvinput = new char*[strlen(inputc)]; //similar to what was done in stringtoken
+			char **argvspaces = new char*[strlen(inputc)];
+
+			int size = 0;
+
+			initializetok(inputc, argvinput);
+			tokenize(argvinput, argvspaces, space, size);
+
+			string check = argvspaces[0];
+
+			if (check == "cd")
+			{
+				checkforcd = true;
+			}
+
+			delete [] space;
+			delete [] inputc;
+			delete [] argvinput;
+			delete [] argvspaces;
+		}
+		
+		if (!checkforcd)
+		{
+			stringtoken(userinp);
+		}
 	}
 }
 

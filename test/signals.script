@@ -1,8 +1,7 @@
-Script started on Fri 29 May 2015 06:18:46 PM PDT
+Script started on Fri 29 May 2015 07:49:09 PM PDT
 ~
 skama004@hammer $ ls
-[0m[01;34mbin[0m/   [01;34mCS100[0m/    [01;34mDocuments[0m/  [01;34mMusic[0m/     [01;34mPublic[0m/     [01;34mVideos[0m/
-[01;34mCS10[0m/  [01;34mDesktop[0m/  [01;34mDownloads[0m/  [01;34mPictures[0m/  [01;34mTemplates[0m/
+[0m[01;34mbin[0m/  [01;34mCS10[0m/  [01;34mCS100[0m/  [01;34mDesktop[0m/  [01;34mDocuments[0m/  [01;34mDownloads[0m/  [01;34mMusic[0m/  [01;34mPictures[0m/  [01;34mPublic[0m/  [01;34mTemplates[0m/  [01;34mVideos[0m/
 [m~
 skama004@hammer $ cd CS100
 ~/CS100
@@ -14,70 +13,148 @@ skama004@hammer $ cd rshell
 skama004@hammer $ ls
 LICENSE  Makefile  README.md  signals.script  [0m[01;34msrc[0m/  [01;34mtest[0m/
 [m~/CS100/rshell
-skama004@hammer $ make
+skama004@hammer $ cd [K[K[Kmake
 g++ -g -Wall -Werror -ansi -pedantic src/main.cpp -o bin/rshell
 g++ -g -Wall -Werror -ansi -pedantic src/ls.cpp -o bin/ls
 g++ -g -Wall -Werror -ansi -pedantic src/cp.cpp -o bin/cp
 ~/CS100/rshell
-skama004@hammer $ bin/rse[Khell
-skama004@hammer~/CS100/rshell $ ls  # b  begin testing for CD  cd
-skama004@hammer~/CS100/rshell $ cd
-/home/csmajs/skama004/CS100/rshell
-/home/csmajs/skama004
-skama004@hammer~ $ cd -
+skama004@hammer $ bin/rshell
+skama004@hammer~/CS100/rshell $ #begin testing for cd
+skama004@hammer~/CS100/rshell $ cd -
 do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-skama004@hammer~/CS100/rshell $ l cd    cd src
-skama004@hammer~/CS100/rshell/src $ cd ..
-skama004@hammer~/CS100/rshell $ cd ..
-skama004@hammer~/CS100 $ cd rshell/src
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-skama004@hammer~/CS100/rshell/src $ cd
-/home/csmajs/skama004/CS100/rshell/src
-/home/csmajs/skama004
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-skama004@hammer~ $ cd -
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-skama004@hammer~/CS100/rshell/src $ cd
-/home/csmajs/skama004/CS100/rshell/src
-/home/csmajs/skama004
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-skama004@hammer~ $ val;gr   grind --leak-check=yes bin/rshell
-valgrind: bin/rshell: No such file or directory
-skama004@hammer~ $ cd    cd  ls
-bin   CS100    Documents  Music     Public     Videos
-CS10  Desktop  Downloads  Pictures  Templates
-skama004@hammer~ $ cd CS01  100/rshell
-skama004@hammer~/CS100/rshell $ ls
-bin  LICENSE  Makefile	README.md  signals.script  src	test
-skama004@hammer~/CS100/rshell $ [A[A[A[B[B[Bvalgrind ==;e    --leak-check=yes bin/rshell
-Error w/ execvp: No such file or directory
-skama004@hammer~/CS100/rshell $ ex  cd src
-skama004@hammer~/CS100/rshell/src $ cd ..
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell $ cd - -
 skama004@hammer~/CS100/rshell $ cd 
 /home/csmajs/skama004/CS100/rshell
 /home/csmajs/skama004
 do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-skama004@hammer~ $ cd -
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-skama004@hammer~/CS100/rshell $ cd -  
-/home/csmajs/skama004/CS100/rshell
-/home/csmajs/skama004
 skama004@hammer~ $ cd -
 skama004@hammer~/CS100/rshell $ cd -
-skama004@hammer~ $ cd ..
-skama004@hammer/home/csmajs $ cd ..
+skama004@hammer~ $ cd CS100
+skama004@hammer~/CS100 $ cd rshell
+skama004@hammer~/CS100/rshell $ cd src
 do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
-skama004@hammer/home $ cd -
-skama004@hammer/home/csmajs $ c d  d -
-skama004@hammer/home $ exit
+skama004@hammer~/CS100/rshell/src $ cd 
+/home/csmajs/skama004/CS100/rshell/src
+/home/csmajs/skama004
+skama004@hammer~ $ cd -
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ cd ..
+skama004@hammer~/CS100/rshell $ cd ..
+skama004@hammer~/CS100 $ cd .. . .  .
+Error: cd
+skama004@hammer~/CS100 $ cd rshe    
+/home/csmajs/skama004/CS100
+/home/csmajs/skama004
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~ $ cd -
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100 $ cd rshell/src
+skama004@hammer~/CS100/rshell/src $ ls
+cp.cpp	cp.h  ls.cpp  main.cpp	mv.cpp	rm.cpp	Timer.h
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ cd .. ..
+Error: cd
+skama004@hammer~/CS100/rshell/src $ 
+skama004@hammer~/CS100/rshell/src $ cd src
+chdir: No such file or directory
+skama004@hammer~/CS100/rshell/src $ 
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ 
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ 
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ 
+skama004@hammer~/CS100/rshell/src $ 
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ 
+skama004@hammer~/CS100/rshell/src $ 
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ 
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ #testing for ctrl c
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ 
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell/src $ ls -R     cd ..
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~/CS100/rshell $ cd ..
+skama004@hammer~/CS100 $ cd ..
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~ $ ls -R
+.:
+bin   CS100    Documents  Music     Public     Videos
+CS10  Desktop  Downloads  Pictures  Templates
+
+./bin:
+pandoraHarvester.sh  songSort.sh
+
+./CS10:
+pascal	pascal.cpp  pascal.o  textadventure  textadventure.cpp	textadventure.o
+
+./CS100:
+firstrepo  git-game  labs  rshell  rshell-1  vimrc  yao
+
+./CS100/firstrepo:
+a.out  cs_100  main.cpp  README  ucr-cs100
+
+./CS100/firstrepo/cs_100:
+ucr-cs100
+
+./CS100/firstrepo/cs_100/ucr-cs100:
+assignments  gitlearn	    LICENSE  README.md	videos
+cheatsheets  lecture-notes  people   textbook
+
+./CS100/firstrepo/cs_100/ucr-cs100/assignments:
+ec  hw	lab  linux  quiz
+
+./CS100/firstrepo/cs_100/ucr-cs100/assignments/ec:
+ec-bounty  ec-online  ec-reading  ec-vim
+
+./CS100/firstrepo/cs_100/ucr-cs100/assignments/ec/ec-bounty:
+grade  README.md
+
+./CS100/firstrepo/cs_100/ucr-cs100/assignments/ec/ec-online:
+grade  README.md
+
+./CS100/firstrepo/cs_100/ucr-cs100/assignments/ec/ec-reading:
+grade  README.md
+
+./CS100/firstrepo/cs_100/ucr-cs100/assignments/ec/ec-vim:
+grade  README.md
+
+./CS100/firstrepo/cs_100/ucr-cs100/assignments/hw:
+hw0-rshell  hw1-ls  hw2-piping	hw3-signals  hw4-contributing
+
+./CS100/firstrepo/cs_100/ucr-cs100/assignments/hw/hw0-rshell:
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted
+skama004@hammer~ $ #CTRL C stopped the             worls  ks
+skama004@hammer~ $ echo hello && ca  cd S CS100
+hello
+Error w/ execvp: No such file or directory
+skama004@hammer~ $ ls
+bin   CS100    Documents  Music     Public     Videos
+CS10  Desktop  Downloads  Pictures  Templates
+skama004@hammer~ $ cd CS100
+skama004@hammer~/CS100 $ echo hell         cd rshell   && echo test
+Error: cd
+skama004@hammer~/CS100 $ cd ! ~
+chdir: No such file or directory
+skama004@hammer~/CS100 $ cd asdkl;fjsdklf
+chdir: No such file or directory
+skama004@hammer~/CS100 $ c cd - -
+skama004@hammer~/CS100 $ cd    ls  exit
 ~/CS100/rshell
 skama004@hammer $ exit
 exit
 
-Script done on Fri 29 May 2015 06:23:18 PM PDT
+Script done on Fri 29 May 2015 07:53:38 PM PDT

@@ -117,10 +117,9 @@ As of May 29th, 2015, rshell is now capable of using the PATH variable to find c
 
 2. cd ~ will not work
 
-3. cd can only handle two parametrs. anything more will result in an error. 
+3. cd can only handle two parameters. anything more will result in an error. 
 
 4. Error message will also be displayed sometimes when running. cd will still work properly, but error messages come randomly. 
+'do_ypcall: clnt_call: RPC: Unable to send; errno = Operation not permitted'
 
-
-
-2. 
+If any more bugs please report to skama004@ucr.edu. 

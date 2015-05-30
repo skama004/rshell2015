@@ -513,6 +513,7 @@ void display()
 
   	while (true)
 	{
+		cin.clear();
 		string prompt; //Created a string for the prompt ($ and hopefully login)
 		char host[333];
 

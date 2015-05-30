@@ -99,3 +99,16 @@ I/O Redirection outputs an error everytimme used.
 Piping does not work as of 5/17/15 
 
 Will continue to work on it.
+
+#Signals
+As of May 29th, 2015, rshell is now capable of using the PATH variable to find commands, use of the "cd" (change directory) command, and using ^C to interrupt a process. 
+
+###How to Run
+ ```
+ $ git clone  https://github.com/skama004/rshell.git
+ $ cd rshell
+ $ git checkout hw3
+ $ make
+ $ bin/rshell
+ ```
+###Known Bugs/Limitations
